@@ -35,7 +35,7 @@
             <td>@rideVM.Destination</td>
             <td>@rideVM.AvailableSeats</td>
             <td>@rideVM.PricePerSeat.ToString("F2") €</td>
-            <td>@rideVM.RideDateTime.ToLocalTime().ToString("g")</td>
+            <td>@rideVM.RideDateTime.ToString("dd/MM/yyyy HH:mm")</td>
             <td>
                 @if (User.Identity.IsAuthenticated)
                 {

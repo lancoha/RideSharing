@@ -25,7 +25,7 @@
             <dd class="col-sm-9">@Model.Destination</dd>
 
             <dt class="col-sm-3">Date of request</dt>
-            <dd class="col-sm-9">@Model.RequestedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</dd>
+            <dd class="col-sm-9">@Model.RequestedAt.ToString("dd/MM/yyyy HH:mm")</dd>
 
             <dt class="col-sm-3">Number of requested seats</dt>
             <dd class="col-sm-9">@Model.SeatsRequested</dd>

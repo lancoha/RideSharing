@@ -16,7 +16,7 @@
     <dd class="col-sm-9">@Model.Destination</dd>
 
     <dt class="col-sm-3">Date of Request</dt>
-    <dd class="col-sm-9">@Model.RequestedAt.ToLocalTime().ToString("g")</dd>
+    <dd class="col-sm-9">@Model.RequestedAt.ToString("dd/MM/yyyy HH:mm")</dd>
 
     <dt class="col-sm-3">Status</dt>
     <dd class="col-sm-9">@Model.Status</dd>
