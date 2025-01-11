@@ -83,7 +83,26 @@
             }
             else
             {
-                <p class="text-success mt-2 fw-bold">Request sent!</p>
+                @if (!string.IsNullOrEmpty(Model.ExistingRequestStatus))
+                {
+                    if (Model.ExistingRequestStatus == "Accepted")
+                    {
+                        <p class="text-success mt-2 fw-bold">Request accepted</p>
+                    }
+                    else if (Model.ExistingRequestStatus == "Rejected")
+                    {
+                        <p class="text-danger mt-2 fw-bold">Request rejected</p>
+                    }
+                    else if (Model.ExistingRequestStatus == "Pending")
+                    {
+                        <p class="text-warning mt-2 fw-bold">Request pending</p>
+                    }
+                    else
+                    {
+                        <p class="text-secondary mt-2 fw-bold">Unknown status</p>
+                    }
+                }
+
             }
             <a class="btn btn-secondary" onclick="history.back()">Back</a>
         </div>

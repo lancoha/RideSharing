@@ -51,7 +51,26 @@
                     }
                     else
                     {
-                        <button class="btn btn-success" disabled>Request sent!</button>
+                        @if (!string.IsNullOrEmpty(rideVM.RequestStatus) && rideVM.RequestStatus != "None")
+                            {
+                            @if (rideVM.RequestStatus == "Accepted")
+                            {
+                                    <button class="btn btn-success" disabled>Request accepted</button>
+                                }
+                                else if (rideVM.RequestStatus == "Rejected")
+                                {
+                                    <button class="btn btn-danger" disabled>Request rejected</button>
+                                }
+                                else if (rideVM.RequestStatus == "Pending")
+                                {
+                                    <button class="btn btn-warning" disabled>Request pending...</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-secondary" disabled>Unknown status</button>
+                                }
+                            }
+
                     }
                 }
             </td>

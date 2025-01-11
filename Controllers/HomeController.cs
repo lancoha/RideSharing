@@ -35,6 +35,7 @@ namespace RideSharing.Controllers
             var rides = await _context.Rides
                 .Include(r => r.Vehicle)
                 .Include(r => r.Driver)
+                .Include(r => r.RideRequests)
                 .Where(r => 
                     (r.AvailableSeats > 0 && r.RideDateTime >= currentDateTime) ||
                     acceptedRides.Contains(r.Id) ||
@@ -57,8 +58,15 @@ namespace RideSharing.Controllers
                 RideDateTime = r.RideDateTime,
                 AvailableSeats = r.AvailableSeats,
                 PricePerSeat = r.PricePerSeat,
-                CanRequest = r.DriverId != userId && !existingRequests.Contains(r.Id) && r.AvailableSeats > 0,
-                IsDriver = r.DriverId == userId
+                CanRequest = r.DriverId != userId 
+                    && !r.RideRequests.Any(rr => rr.PassengerId == userId && (rr.Status == "Pending" || rr.Status == "Accepted" || rr.Status == "Rejected")) 
+                    && r.AvailableSeats > 0,
+                IsDriver = r.DriverId == userId,
+                RequestStatus = r.RideRequests
+                    .Where(rr => rr.PassengerId == userId)
+                    .OrderByDescending(rr => rr.RequestedAt)
+                    .Select(rr => rr.Status)
+                    .FirstOrDefault() ?? "None"
             }).ToList();
 
             return View(rideViewModels);

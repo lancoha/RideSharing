@@ -16,5 +16,6 @@ namespace RideSharing.ViewModels
         public decimal PricePerSeat { get; set; }
         public string TotalDistance { get; set; }
         public string TotalDuration { get; set; }
+        public string RequestStatus { get; set; }
     }
 }
