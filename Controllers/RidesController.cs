@@ -255,6 +255,12 @@ namespace RideSharing.Controllers
                         .OrderByDescending(rr => rr.RequestedAt)
                         .FirstOrDefaultAsync();
             }
+            var acceptedPassengers = await _context.RideRequests
+                .Where(r => r.RideId == id && r.Status == "Accepted")
+                .Select(r => new { r.Id, r.Passenger.Email })
+                .ToListAsync();
+
+            ViewBag.AcceptedPassengers = acceptedPassengers;
 
             bool hasAcceptedRequest = ride.RideRequests.Any(rr => rr.Status == "Accepted" || rr.Status == "Pending");
             ViewBag.HasAcceptedRequest = hasAcceptedRequest;
