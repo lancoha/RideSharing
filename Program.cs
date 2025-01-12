@@ -19,7 +19,7 @@ builder.Services.AddControllersWithViews();
 // pred var app = builder.Build();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection2") 
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection2' not found.");
 
 builder.Services.AddDbContext<RideSharingContext>(options =>
