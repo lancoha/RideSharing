@@ -15,7 +15,11 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection2") 
+
+// pred var app = builder.Build();
+builder.Services.AddSwaggerGen();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection2' not found.");
 
 builder.Services.AddDbContext<RideSharingContext>(options =>
@@ -48,6 +52,15 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
+
+//# spodnje pred UseRouting
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
+
+
 
 if (!app.Environment.IsDevelopment())
 {
